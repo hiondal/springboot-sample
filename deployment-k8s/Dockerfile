@@ -3,7 +3,7 @@ FROM java:8-jre
 #Get APP home directory using --build-arg
 #ARG APP_HOME=.
 
-ENV VERTICLE_FILE sample-service.jar
+ENV VERTICLE_FILE springboot-service.jar
 # Set the location of the verticles
 ENV VERTICLE_HOME /usr/verticles
 
