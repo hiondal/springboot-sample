@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-service
+  labels:
+    appname: sample-service
+spec:
+  selector:
+    matchLabels:
+      appname: sample-service
+  replicas: 1
+  template:
+    metadata:
+      name: sample-service
+      labels:
+        appname: sample-service
+    spec:
+      containers:
+        - name: sample-service-container
+          image: happycloudpak/sample-service
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "8081"
+          ports:
+            - name: port1
+              containerPort: 8081
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1024Mi
+
+              
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-sample-service
+spec:
+  type: NodePort
+  selector:
+    appname: sample-service
+  ports:
+    - name: port-sample-service
+      port: 8090
+      targetPort: 8081
+      
+---
+
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: ing-sample-service
+spec:
+  rules:
+  - host: sample-service.169.56.170.165.nip.io
+    http:
+      paths:
+      - path: /  
+        backend:
+          serviceName: svc-sample-service
+          servicePort: 8090
+
+
