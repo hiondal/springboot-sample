@@ -18,11 +18,11 @@ EXPOSE 80
 WORKDIR $VERTICLE_HOME
 
 # Copy your fat jar to the container
-#COPY ${APP_HOME}/sample-service6/target/$VERTICLE_FILE $VERTICLE_HOME
+#COPY ${APP_HOME}/springboot-service6/target/$VERTICLE_FILE $VERTICLE_HOME
 
 # __custom__ innerproject
-#COPY ./target/$VERTICLE_FILE $VERTICLE_HOME
-COPY ./sample-service/target/$VERTICLE_FILE $VERTICLE_HOME
+COPY ./target/$VERTICLE_FILE $VERTICLE_HOME
+#COPY ./sample-service/target/$VERTICLE_FILE $VERTICLE_HOME
 
 # Launch the verticle
 ENTRYPOINT ["sh", "-c"]

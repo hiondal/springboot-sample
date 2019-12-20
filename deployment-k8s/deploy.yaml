@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-service
+  name: springboot-service
   labels:
-    appname: sample-service
+    appname: springboot-service
 spec:
   selector:
     matchLabels:
-      appname: sample-service
+      appname: springboot-service
   replicas: 1
   template:
     metadata:
-      name: sample-service
+      name: springboot-service
       labels:
-        appname: sample-service
+        appname: springboot-service
     spec:
       containers:
-        - name: sample-service-container
-          image: happycloudpak/sample-service
+        - name: springboot-service-container
+          image: happycloudpak/springboot-service
           imagePullPolicy: Always
           env:
             - name: PORT
@@ -39,13 +39,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-sample-service
+  name: svc-springboot-service
 spec:
   type: NodePort
   selector:
-    appname: sample-service
+    appname: springboot-service
   ports:
-    - name: port-sample-service
+    - name: port-springboot-service
       port: 8090
       targetPort: 8081
       
@@ -57,15 +57,15 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
-  name: ing-sample-service
+  name: ing-springboot-service
 spec:
   rules:
-  - host: sample-service.169.56.170.165.nip.io
+  - host: springboot-service.169.56.170.165.nip.io
     http:
       paths:
       - path: /  
         backend:
-          serviceName: svc-sample-service
+          serviceName: svc-springboot-service
           servicePort: 8090
 
 
