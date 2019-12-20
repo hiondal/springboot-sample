@@ -22,7 +22,7 @@ WORKDIR $VERTICLE_HOME
 
 # __custom__ innerproject
 COPY ./target/$VERTICLE_FILE $VERTICLE_HOME
-#COPY ./sample-service/target/$VERTICLE_FILE $VERTICLE_HOME
+#COPY ./springboot-service/target/$VERTICLE_FILE $VERTICLE_HOME
 
 # Launch the verticle
 ENTRYPOINT ["sh", "-c"]
