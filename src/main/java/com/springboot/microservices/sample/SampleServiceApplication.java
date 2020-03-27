@@ -16,4 +16,15 @@ public class SampleServiceApplication  {
 		SpringApplication.run(SampleServiceApplication.class, args);
 	}
 
+	@ResponseBody
+	@GetMapping(value = "/health")
+	public String health() {
+	   return "ok";
+	}
+	@ResponseBody
+	@GetMapping(value = "/")
+	public String index() {
+	   return "Hello ! This is sample springboot application.";
+	}
+
 }
