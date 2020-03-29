@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy-service
+spec:
+  inputs:
+    params:
+      - name: ARGS
+        default:
+          - help
+        description: The OpenShift CLI arguments to run
+        type: array
+      - name: DC_NAME
+        description: DeploymentConfig name
+        type: string
+      - name: SVC_NAME
+        description: Service name
+        type: string
+  steps:
+    - name: clean-dc
+      command:
+      - /usr/bin/oc
+      args:
+      - delete
+      - dc
+      - $(inputs.params.DC_NAME)
+      - --ignore-not-found=true
+      image: 'quay.io/openshift/origin-cli:latest'
+
+    - name: clean-svc
+      command:
+      - /usr/bin/oc
+      args:
+      - delete
+      - svc
+      - $(inputs.params.SVC_NAME)
+      - --ignore-not-found=true
+      image: 'quay.io/openshift/origin-cli:latest'
+
+    - name: deploy
+      command:
+      - /usr/bin/oc
+      args:
+      - $(inputs.params.ARGS)
+      image: 'quay.io/openshift/origin-cli:latest'
+ 

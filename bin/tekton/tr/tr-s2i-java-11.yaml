@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: tr-s2i-java-11
+spec:
+  inputs:
+    params:
+      - name: TLSVERIFY
+        value: 'false'
+    resources:
+      - name: source
+        resourceRef:
+          name: pr-git-spring-sample
+  outputs:
+    resources:
+      - name: image
+        paths:
+          - build/image
+        resourceRef:
+          name: pr-image-spring-sample
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: s2i-java-11
+  timeout: 1h0m0s
+

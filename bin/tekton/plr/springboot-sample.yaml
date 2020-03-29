@@ -43,5 +43,5 @@ spec:
         - build
       taskRef:
         kind: Task
-        name: deploy-service
+        name: deploy-java-11
  

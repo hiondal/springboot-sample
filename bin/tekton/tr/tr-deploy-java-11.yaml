@@ -9,7 +9,7 @@ spec:
         value:
           - new-app
           #- '--docker-image'
-          - springboot-sample
+          - springboot-sample:0.0.3
       - name: DC_NAME
         value: springboot-sample
       - name: SVC_NAME
@@ -17,5 +17,5 @@ spec:
   serviceAccountName: pipeline
   taskRef:
     kind: Task
-    name: deploy-service
+    name: deploy-java-11
   timeout: 1h0m0s
