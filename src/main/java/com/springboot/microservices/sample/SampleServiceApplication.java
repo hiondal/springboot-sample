@@ -30,7 +30,7 @@ public class SampleServiceApplication  {
 	@ResponseBody
 	@GetMapping(value = "/")
 	public String index() {
-	   return "Hello ! This is sample springboot application!!!";
+	   return "This is sample springboot application !!!";
 	}
 
 }
