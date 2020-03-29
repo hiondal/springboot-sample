@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: tr-deploy-java-11
+spec:
+  inputs:
+    params:
+      - name: ARGS
+        value:
+          - new-app
+          #- '--docker-image'
+          - springboot-sample:0.0.3
+      - name: DC_NAME
+        value: springboot-sample
+      - name: SVC_NAME
+        value: springboot-sample
+  serviceAccountName: pipeline
+  taskRef:
+    kind: Task
+    name: deploy-java-11
+  timeout: 1h0m0s

@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: springboot-sample
+spec:
+  params:
+    - name: IMAGE_NAME
+      type: string
+  resources:
+    - name: app-source
+      type: git
+    - name: app-image
+      type: image
+  tasks:
+    - name: build
+      params:
+      - name: TLSVERIFY
+        value: 'false'
+      - name: MAVEN_MIRROR_URL
+        value: 'http://nexus.hcp.darumtech.net:8081/repository/maven-central'
+      resources:
+        inputs:
+          - name: source
+            resource: app-source
+        outputs:
+          - name: image
+            resource: app-image
+      taskRef:
+        kind: Task
+        name: s2i-java-11
+
+    - name: deploy
+      params:
+        - name: ARGS
+          value:
+            - new-app
+            - $(params.IMAGE_NAME)
+        - name: DC_NAME
+          value: springboot-sample
+        - name: SVC_NAME
+          value: springboot-sample
+      runAfter:
+        - build
+      taskRef:
+        kind: Task
+        name: deploy-java-11
+ 

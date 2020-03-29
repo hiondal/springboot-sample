@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: springboot-sample
+spec:
+  params:
+    - name: IMAGE_NAME
+      value: springboot-sample
+  pipelineRef:
+    name: springboot-sample
+  resources:
+    - name: app-source
+      resourceRef:
+        name: pr-git-spring-sample
+    - name: app-image
+      resourceRef:
+        name: pr-image-spring-sample
+  serviceAccountName: pipeline
+  timeout: 1h0m0s

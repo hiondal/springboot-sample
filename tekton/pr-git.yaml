@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: pr-git-spring-sample
+spec:
+  type: git
+  params:
+    - name: url
+      value: 'https://gitlab.com/ocean4/mvp-jenkins-springboot-sample.git'
+
