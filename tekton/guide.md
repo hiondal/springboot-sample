@@ -1,6 +1,6 @@
 ## 사전작업
-- pr-image.yaml에서 private image registry 주소 수정
-- plr/plr plr-springboot-sample.yaml 에서 maven mirror 주소 수정
+- pr-image.yaml에서 private image registry 주소 수정   
+- plr/springboot-sample.yaml 에서 maven mirror 주소 수정   
 
 ## How to deploy with tekton on OCP
 $ cd tekton   
