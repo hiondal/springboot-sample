@@ -1,4 +1,4 @@
-# How to deploy this application!
+# How to deploy this application !
 
 ## ICP 배포 
 ---
